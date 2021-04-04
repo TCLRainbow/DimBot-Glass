@@ -1,6 +1,0 @@
-- uses: actions/upload-artifact@v2
-  with:
-    name: DimBot
-    path: |
-      DimBot/bin/Debug/net5.0/linux-arm64/publish/DimBot
-      DimBot/bin/Debug/net5.0/linux-arm64/publish/*.dll
