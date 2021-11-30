@@ -20,11 +20,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet publish -r linux-arm64 --self-contained false
+      run: dotnet publish -c RELEASE -r debian-arm64 --no-self-contained
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
         name: DimBot
         path: |
-          DimBot-Helenite/bin/Debug/net6.0/linux-arm64/publish/DimBot
-          DimBot-Helenite/bin/Debug/net6.0/linux-arm64/publish/*.dll
+          DimBot-Helenite/bin/Release/net6.0/debian-arm64/*.dll
+          DimBot-Helenite/bin/Release/net6.0/linux-arm64/publish/
