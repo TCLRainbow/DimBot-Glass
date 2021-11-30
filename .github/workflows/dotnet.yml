@@ -26,5 +26,5 @@ jobs:
       with:
         name: DimBot
         path: |
-          DimBot/bin/Debug/net6.0/linux-arm64/publish/DimBot
-          DimBot/bin/Debug/net6.0/linux-arm64/publish/*.dll
+          DimBot-Helenite/bin/Debug/net6.0/linux-arm64/publish/DimBot
+          DimBot-Helenite/bin/Debug/net6.0/linux-arm64/publish/*.dll
