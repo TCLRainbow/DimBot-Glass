@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -26,5 +26,5 @@ jobs:
       with:
         name: DimBot
         path: |
-          DimBot/bin/Debug/net5.0/linux-arm64/publish/DimBot
-          DimBot/bin/Debug/net5.0/linux-arm64/publish/*.dll
+          DimBot/bin/Debug/net6.0/linux-arm64/publish/DimBot
+          DimBot/bin/Debug/net6.0/linux-arm64/publish/*.dll
