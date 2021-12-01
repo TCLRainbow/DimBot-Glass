@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using DimBot;
+using Newtonsoft.Json;
 using System.IO;
 
 DiscordSocketClient bot = new();
 DimSecret dimSecret = JsonConvert.DeserializeObject<DimSecret>(File.ReadAllText("dimsecret.json"));
-CommandService cmdSvc = new();
+
 
 Task Log(LogMessage msg)
 {
@@ -25,8 +26,8 @@ async Task HandleCommandAsync(SocketMessage msgParam)
 		msg.Author.IsBot)
 		return;
 
-	await cmdSvc.ExecuteAsync(
-			context: new SocketCommandContext(bot, msg),
+	await Missile.cmdSvc.ExecuteAsync(
+            context: new SocketCommandContext(bot, msg),
 			argPos: argPos,
 			services: null);
 }
@@ -39,7 +40,7 @@ async Task MainAsync()
 	await bot.StartAsync();
 
 	bot.MessageReceived += HandleCommandAsync;
-	await cmdSvc.AddModulesAsync(assembly: System.Reflection.Assembly.GetEntryAssembly(), services: null);
+	await Missile.cmdSvc.AddModulesAsync(assembly: System.Reflection.Assembly.GetEntryAssembly(), services: null);
 
 	await Task.Delay(-1);
 }

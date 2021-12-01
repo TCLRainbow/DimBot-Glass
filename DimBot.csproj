@@ -6,11 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Platforms>AnyCPU;x64</Platforms>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="dimsecret.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Discord.Net.Commands" Version="2.4.0" />
@@ -20,11 +17,17 @@
     <Using Include="Discord.WebSocket" />
     <Using Include="Discord.Commands" />
     
-    <Using Remove="System.Linq" />
     <Using Remove="System.Net.Http" />
     <Using Remove="System.IO" />
     <Using Remove="System.Collections.Generic" />
     <Using Remove="System.Threading" />
+  </ItemGroup>
+
+ 
+  <ItemGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <None Update="dimsecret.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

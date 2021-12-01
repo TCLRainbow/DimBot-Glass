@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
-using System;
 
 namespace DimBot.cmd
 {
@@ -8,6 +6,7 @@ namespace DimBot.cmd
     {
 
         [Command("bot")]
+        [Summary("Displays bot info")]
         public async Task bot()
         {
             Random r = new();
@@ -45,6 +44,7 @@ namespace DimBot.cmd
         }
 
         [Command("ping"), Alias("noel")]
+        [Summary("Listens to my heartbeat (gateway latency & total message reaction latency")]
         public async Task ping()
         {
             IUserMessage msg = await ReplyAsync($"Average: {Context.Client.Latency}ms");
@@ -55,5 +55,10 @@ namespace DimBot.cmd
             string old = msg.Content;
             await msg.ModifyAsync(m => m.Content = $"{old} Immediate response: {elapsed}ms"); 
         }
+
+        [Command("sponsor")]
+        [Summary("$.$")]
+        public async Task sponsor() => await ReplyAsync(Missile.Sponsor);
+
     }
 }
