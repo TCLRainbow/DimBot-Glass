@@ -17,14 +17,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Build
       run: dotnet publish -c RELEASE -r debian-arm64 --no-self-contained
-    - name: Upload
+    - name: Upload DimBot executable
       uses: actions/upload-artifact@v2
       with:
         name: DimBot
-        path: |
-          DimBot-Helenite/bin/Release/net6.0/debian-arm64/*.dll
-          DimBot-Helenite/bin/Release/net6.0/linux-arm64/publish/
+        path: bin/Release/net6.0/debian-arm64/publish/DimBot
+    - name: Upload DimBot library
+      uses: actions/upload-artifact@v2
+      with:
+        name: DimBot.dll
+        path: bin/Release/net6.0/debian-arm64/publish/DimBot.dll
