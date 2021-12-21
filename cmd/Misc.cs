@@ -14,8 +14,22 @@ namespace DimBot.cmd
             Process p = Process.GetCurrentProcess();
             float allocated = p.WorkingSet64 / 1024 / 1024f;
             float used = p.PrivateMemorySize64 / 1024 / 1024f;
+            string emojiFilter;
+            Color color;
 
-            GuildEmote[] emotes = Context.Client.GetGuild(Missile.s_myGuildId).Emotes.Where(e => e.Name.StartsWith("sayu")).ToArray();
+            if (r.Next(2) == 1)
+            {
+                emojiFilter = "chloe";
+                color = Color.Red;
+            } else
+            {
+                emojiFilter = "sayu";
+                color = Missile.RandomColor();
+            }
+
+            GuildEmote[] emotes = Context.Client.GetGuild(Missile.s_myGuildId).Emotes
+                .Where(e => e.Name.StartsWith(emojiFilter))
+                .ToArray();
             GuildEmote emote = emotes[r.Next(emotes.Length)];
 
             await ReplyAsync(embed: new EmbedBuilder()
@@ -26,7 +40,7 @@ namespace DimBot.cmd
                     Name = "Click here to let me join your server! [Open Beta]",
                     Url = "https://discord.com/api/oauth2/authorize?client_id=574617418924687419&permissions=8&scope=bot"
                 },
-                Color = Missile.RandomColor()
+                Color = color
             }
                 .AddField("Guild count", Context.Client.Guilds.Count, inline: true)
                 .AddField("Uptime", Missile.s_uptime.Elapsed, inline: true)
@@ -38,7 +52,7 @@ namespace DimBot.cmd
                 .AddField("Discord server", "[6PjhjCD](https://discord.gg/6PjhjCD)", inline: true)
                 // .AddField("CPU", cpu.TotalMilliseconds, inline: true)
                 .AddField("Process RAM usage / allocated (MiB)", $"{used} / {allocated}", inline: true)
-                .WithFooter(text: string.Concat("Mood: ", emote.Name.AsSpan(4)))
+                .WithFooter(text: string.Concat("Mood: ", emote.Name.AsSpan(emojiFilter.Length)))
                 .WithImageUrl(emote.Url)
                 .Build());
         }
